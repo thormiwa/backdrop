@@ -1,0 +1,16 @@
+{
+  "name": "backdrop",
+  "version": "1.0.0",
+  "description": "backdrop engineering challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "author": "Tomiwa",
+  "license": "ISC",
+  "dependencies": {
+    "expres": "0.0.5",
+    "fast-levenshtein": "^3.0.0",
+    "graphql": "^16.6.0"
+  }
+}
