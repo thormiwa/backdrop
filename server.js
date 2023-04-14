@@ -1,7 +1,7 @@
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, json } = require('sequelize');
 const cors = require('cors');
 const resolvers = require('./resolvers/user');
 const user = require('./models/user');
@@ -36,16 +36,18 @@ const root = {
     verifyUser: resolvers.verifyUser
 };
 
+const errorHandler = (err) => {
+    console.log(JSON.stringify(err)); // log the error for debugging purposes
+    const message = err.message;
+    const statusCode = err.code || 500; // set a default status code of 500 if err.code is not defined
+    return { message, statusCode};
+};  
+
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,
-    customFormatErrorFn: (err) => {
-        const message = err.message;
-        const statusCode = err.extensions?.response?.status || 500;
-        // Return a custom error object with the message and status code
-        return { message, statusCode };
-    }
+    customFormatErrorFn: errorHandler
 }));
 
 user.User.sequelize.sync().then(() => {
