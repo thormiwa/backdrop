@@ -7,31 +7,31 @@ const sequelize = new Sequelize({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    logging: console.log
+    logging: console.log,
 });
 
 const User = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
-    user_account_number: {
+    userAccountNumber: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    user_bank_code: {
+    userBankCode: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    user_account_name: {
+    userAccountName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    is_verified: {
+    isVerified: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
-    }
+        allowNull: false,
+    },
 });
 
 module.exports = { sequelize, User };
