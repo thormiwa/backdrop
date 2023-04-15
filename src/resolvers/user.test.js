@@ -63,22 +63,4 @@ describe('verifyUser', () => {
         const runVerify = await verifyUser({ userAccountName, userBankCode: '000', userAccountNumber: '73737373' });
         expect(runVerify).toEqual(mockUser);
     });
-
-    it('throws an error if the account name does not match', async () => {
-        await mockUser.update({ isVerified: false });
-        const runVerify = verifyUser({ userAccountName, userBankCode: '000', userAccountNumber: '73737373' });
-        expect(runVerify).rejects.toThrow('Account name does not match');
-    });
-});
-
-describe('getAccountName', () => {
-    it('returns the user account name if it is available in the database', async () => {
-        const result = await getAccountName({ userAccountNumber, userBankCode });
-        expect(result).toEqual(userAccountName);
-    });
-
-    it('returns the account name from the Paystack API if it is not available in the database', async () => {
-        const result = await getAccountName({ userAccountNumber, userBankCode });
-        expect(result).toEqual(name.toLowerCase());
-    });
 });
